@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-header',
   template: `
     <p>
-      header works!
+      header works! some changes
     </p>
   `,
   styles: [

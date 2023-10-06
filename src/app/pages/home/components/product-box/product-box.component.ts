@@ -7,16 +7,8 @@ import { Product } from 'src/app/models/product.model';
 })
 export class ProductBoxComponent implements OnInit {
   @Input() fullWidthMode = false;
+  @Input() product: Product | undefined;
 
-  product: Product | undefined = {
-    id: 1,
-    title: 'sneakers',
-    price: 150,
-    category: 'shoes',
-    description: 'Description',
-    image: 'https://www.cln.com.ph/cdn/shop/files/Brund4_Bone_8_1024x1024.jpg?v=1691988483',
-
-  };
   @Output() addToCart = new EventEmitter();
 
   constructor() { }
@@ -26,8 +18,6 @@ export class ProductBoxComponent implements OnInit {
 
   onAddToCart(): void {
     this.addToCart.emit(this.product);
-
-
   }
 
 }

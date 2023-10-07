@@ -2,6 +2,7 @@
     <mat-drawer mode="side" opened class="p-6">
         <app-filters (showCategory)="onShowCategory($event)" ></app-filters>
     </mat-drawer>
+    
     <mat-drawer-content class="p-6">
         <app-products-header (columnsCountChange)="onColumnsCountChange($event)" (itemsCountChange)="onItemsCountChange($event)" (sortChange)="onSortChange($event)" ></app-products-header>
         <mat-grid-list
@@ -14,4 +15,5 @@
           </mat-grid-tile>
         </mat-grid-list>
     </mat-drawer-content>
+    
 </mat-drawer-container>

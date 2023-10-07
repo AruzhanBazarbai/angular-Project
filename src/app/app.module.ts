@@ -26,6 +26,10 @@ import { CartComponent } from './pages/cart/cart.component';
 import { CartService } from './services/cart.service';
 import { StoreService } from './services/store.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
+import { LoginComponent } from './pages/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -36,6 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
     FiltersComponent,
     ProductBoxComponent,
     CartComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,9 +59,11 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     MatBadgeModule,
     MatSnackBarModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatFormFieldModule
   ],
-  providers: [CartService, StoreService],
+  providers: [CartService, StoreService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

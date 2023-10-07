@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Cart, CartItem } from '../models/cart.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class CartService {
 
   cart = new BehaviorSubject<Cart>({items: []});
 
-  constructor(private _snackBar: MatSnackBar) { }
+  constructor(private _snackBar: MatSnackBar, private router: Router) { }
 
   addToCart(item: CartItem): void {
     const items = [...this.cart.value.items];
@@ -78,5 +79,15 @@ export class CartService {
     }
     return filteredItems;
     
+  }
+
+  onSubmitPurchase(): void {
+    if (localStorage.getItem("token")) {
+      this.clearCart();
+      this._snackBar.open('Your order is has been placed', 'Ok', { duration: 3000 });
+      this.router.navigate(['/home']);
+    } else {
+      this.router.navigate(['./login']);
+    }
   }
 }

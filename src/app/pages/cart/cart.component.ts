@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Cart, CartItem } from 'src/app/models/cart.model';
 import { CartService } from '../../services/cart.service';
 
@@ -29,7 +30,7 @@ export class CartComponent implements OnInit {
   dataSource: Array<CartItem> = [];
   displayedColumns: Array<string> = ['product', 'name', 'price', 'quantity', 'total', 'action'];
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
     this.cartService.cart.subscribe((_cart: Cart) => {
@@ -55,5 +56,8 @@ export class CartComponent implements OnInit {
 
   onRemoveQuantity(item: CartItem): void {
     this.cartService.removeQuantity(item);
+  }
+  onSubmit() {
+    this.cartService.onSubmitPurchase();
   }
 }

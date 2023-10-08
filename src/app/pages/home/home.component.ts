@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { StoreService } from 'src/app/services/store.service';
 
@@ -18,11 +19,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   sort = 'desc';
   count = '12';
   productsSubscription: Subscription | undefined;
+  token: any;
 
-  constructor(private _cartService: CartService, private storeService: StoreService) { }
+  constructor(private _cartService: CartService, private storeService: StoreService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getProducts();
+    // this.authService.login("aruzhanart2003@mail.ru", "123456789").subscribe((data) => {
+    //       this.token = data;
+    //       console.log(this.token)
+    //     localStorage.setItem("token", this.token.token);
+    // });
   }
   getProducts(): void {
     this.productsSubscription = this.storeService.getAllProducts(this.count, this.sort, this.category).subscribe((_products) => {
@@ -57,9 +64,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     
 
   }
+  onSubmit(): void {
+    // this.authService.checkUserIfExists("Aruzhan", "123456789");
+  }
   ngOnDestroy(): void {
     if (this.productsSubscription) {
       this.productsSubscription.unsubscribe();
     }
   }
+
 }

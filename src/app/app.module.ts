@@ -63,7 +63,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule,
     MatFormFieldModule
   ],
-  providers: [CartService, StoreService,AuthService],
+  providers: [CartService, StoreService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

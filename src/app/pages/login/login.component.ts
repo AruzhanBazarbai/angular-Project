@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class LoginComponent implements OnInit {
     
   form: FormGroup;
   token: any;
+  authSubscription: Subscription | undefined;
 
     constructor(private fb:FormBuilder, 
                  private authService: AuthService, 
@@ -34,7 +36,7 @@ export class LoginComponent implements OnInit {
   
   login() {
     const val = this.form.value;
-    this.authService.login(val.email, val.password).subscribe((data) => {
+    this.authSubscription =  this.authService.login(val.email, val.password).subscribe((data) => {
           this.token = data;
         localStorage.setItem("token", this.token.token);
     }); 
@@ -43,6 +45,11 @@ export class LoginComponent implements OnInit {
       this.location.back();
     } else {
       this._snackBar.open('Authorization error. Try again to login', 'Ok', { duration: 3000 });
+    }
+  }
+  ngOnDestroy(): void {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
     }
   }
 

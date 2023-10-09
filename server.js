@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 
 const RSA_PRIVATE_KEY = fs.readFileSync('./dev.key', 'utf-8');
 const findUserIdForEmail = require('./users.js').findUserIdForEmail;
+const addUser = require('./users.js').addUser;
   
 // handling CORS 
 app.use((req, res, next) => { 
@@ -28,19 +29,46 @@ app.post('/api/login', (req, res) => {
   if (email && password) {
     const userId = findUserIdForEmail(email, password);
 
-    if (userId) {
+    if (userId!=="-1") {
       const jwtBearerToken = jwt.sign({}, RSA_PRIVATE_KEY, {
         algorithm: 'RS256',
         expiresIn: 120,
-        subject: userId,
+        subject: (userId).toString(),
       });
 
-      res.json({ token: jwtBearerToken });
+      res.json({ token: jwtBearerToken, success: true, message: "success authorization" });
     } else {
-      res.status(401).json({ message: 'User doesnt exist' });
+      res.json({success: false, message: "Authorization error" });
     }
   } else {
     res.status(401).json({ message: 'Authorization error' });
+  }
+});
+app.post('/api/register', (req, res) => {
+  const name = req.body.name;
+  const address = req.body.address;
+  const email = req.body.email;
+  const password = req.body.password;
+
+  if (email && password && name && address) {
+    const userId = findUserIdForEmail(email, password);
+    
+    if (userId === "-1") {
+      const userId = addUser(name, address, email, password);
+      if (userId === "-1") {
+        res.json({ success: false, message: "registration error" });
+      }
+
+
+    } 
+    const jwtBearerToken = jwt.sign({}, RSA_PRIVATE_KEY, {
+      algorithm: 'RS256',
+      expiresIn: 10000,
+      subject: (userId).toString(),
+    });
+    res.json({ token: jwtBearerToken, success: true, message: "success registration" });
+  } else {
+    res.status(401).json({ message: 'Authorization error 2222' });
   }
 });
 

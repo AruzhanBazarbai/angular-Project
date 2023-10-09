@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Cart, CartItem } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +10,10 @@ import { CartService } from 'src/app/services/cart.service';
   styles: [
   ]
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
   private _cart: Cart = { items: []};
   itemsQuantity = 0;
+  auth : boolean | undefined;
 
   @Input()
 
@@ -25,7 +28,15 @@ export class HeaderComponent {
       .reduce((prev, current)=> prev + current, 0);
   }
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private authService: AuthService, private router: Router) { }
+
+  ngOnInit(): void {
+    if (localStorage.getItem("token")) {
+      this.auth = true;
+    } else {
+      this.auth = false;
+    }
+  }
 
   getTotal(items: Array<CartItem>): number{
     return this.cartService.getTotal(items);
@@ -33,5 +44,13 @@ export class HeaderComponent {
 
   onClearCard() {
     this.cartService.clearCart();
+  }
+  logout() {
+    localStorage.removeItem("token")
+    this.auth = false;
+  }
+  login() {
+    this.router.navigate(['/login']);
+    this.auth = true;
   }
 }

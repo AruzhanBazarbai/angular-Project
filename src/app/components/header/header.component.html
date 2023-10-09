@@ -1,8 +1,16 @@
 <mat-toolbar class="max-w-7xl mx-auto border-x justify-between">
    <a routerLink="home">Home</a> 
-   <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon [matBadge]="itemsQuantity" [matBadgeHidden]="!itemsQuantity" matBadgeColor="warn">shopping_cart</mat-icon>
-   </button>
+   <div>
+      <button *ngIf="!auth" (click)="login()" class="border border-black rounded-xl px-2 hover:bg-white mr-4">
+      Login
+      </button>
+      <button *ngIf="auth" (click)="logout()" class="border border-black rounded-xl px-2 hover:bg-white mr-4">
+      Log out
+      </button>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+         <mat-icon [matBadge]="itemsQuantity" [matBadgeHidden]="!itemsQuantity" matBadgeColor="warn">shopping_cart</mat-icon>
+      </button>
+   </div>
    <mat-menu #menu="matMenu">
       <div class="p-3 divide-y divide-solid">
          <div class="pb-3 flex justify-between">

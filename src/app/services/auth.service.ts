@@ -19,6 +19,14 @@ export class AuthService {
   login(email: string, password: string) {
     return this.httpClient.post('http://localhost:3000/api/login', {email, password})
   }
+  register(email: string, name: string, address: string, password: string) {
+    return this.httpClient.post('http://localhost:3000/api/register', {email, name, address, password})
+  }
+  logout() {
+    if (localStorage.getItem("token")) {
+      localStorage.removeItem("token")
+    }
+  }
 
   // login(email:string, password:string ) {
   //       return this.httpClient.post<User>('/api/login', {email, password})

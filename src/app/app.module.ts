@@ -30,6 +30,8 @@ import { AuthService } from './services/auth.service';
 import { LoginComponent } from './pages/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { RegistrationComponent } from './pages/registration/registration.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ProductBoxComponent,
     CartComponent,
     LoginComponent,
+    RegistrationComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

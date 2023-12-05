@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,11 +11,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
     
-  form: FormGroup;
+  form: UntypedFormGroup;
   token: any;
   authSubscription: Subscription | undefined;
 
-    constructor(private fb:FormBuilder, 
+    constructor(private fb:UntypedFormBuilder, 
                  private authService: AuthService, 
                 private location: Location,
                 private _snackBar: MatSnackBar

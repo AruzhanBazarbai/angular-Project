@@ -1,5 +1,9 @@
 # AngularProjectShop
 
+this is e-shop web application, where you can see and select products and add to cart, then make a purchase. Also you can login, logout and register
+
+To start the project you need to run command "node server.js" in one and command "ng serve" in another terminal, then use the project
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
 
 ## Development server

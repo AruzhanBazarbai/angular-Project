@@ -19,6 +19,11 @@ export class StoreService {
       }?sort=${sort}&limit=${limit}`
     )
   }
+  getProductById(id: string): Observable<Product> {
+    return this.httpClient.get<Product>(
+      `${STORE_BASE_URL}/products/${id}`
+    )
+  }
   getAllCategories(): Observable<Array<string>> {
     return this.httpClient.get<Array<string>>(
       `${STORE_BASE_URL}/products/categories`

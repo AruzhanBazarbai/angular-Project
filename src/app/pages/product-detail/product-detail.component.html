@@ -1,0 +1,18 @@
+<mat-card *ngIf="product" class="text-center w-full flex justify-center items-center">
+    <div class="w-3/4">
+        <img class="mb-1 mx-auto w-[400px] h-[400px]" [src]="product.image" alt="img" />
+        <div class="w-full px-8 flex flex-col justify-between">
+            <div>
+                <h5>{{product.category}}</h5>
+                <p class="truncate hover:whitespace-normal text-[25px] font-medium leading-[32px]">{{product.title}}</p>
+                <p class="max-w-[500px]">{{product.description}}</p>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-red-400">{{product.price | currency}}</span>
+                <button (click)="onAddToCart(product)">
+                    <mat-icon class="text-gray-500">shopping_cart</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-card>

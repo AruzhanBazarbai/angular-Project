@@ -33,6 +33,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     LoginComponent,
     RegistrationComponent,
     NotFoundComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

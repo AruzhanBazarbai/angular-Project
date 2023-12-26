@@ -13,6 +13,8 @@ export class ProductDetailComponent implements OnInit {
   productId: string | undefined;
   product: Product | undefined;
   productSubscription: Subscription | undefined;
+  products: Array<Product> | undefined;
+  productsSubscription: Subscription | undefined;
 
 
   constructor(private storeService: StoreService, private route: ActivatedRoute, private _cartService: CartService) { }
@@ -22,11 +24,18 @@ export class ProductDetailComponent implements OnInit {
       this.productId = params['id'];
     });
     this.getProduct();
+    this.getProductsByCtg();
   }
 
   getProduct(): void {
     this.productSubscription = this.storeService.getProductById(this.productId ?? "1").subscribe((_product) => {
       this.product = _product;
+    })
+  }
+
+  getProductsByCtg(): void {
+    this.productsSubscription = this.storeService.getAllProducts("4", "asc", this.product?.category).subscribe((_products) => {
+      this.products = _products;
     })
   }
   onAddToCart(product: Product): void {

@@ -1,18 +1,31 @@
-<mat-card *ngIf="product" class="text-center w-full flex justify-center items-center">
-    <div class="w-3/4">
-        <img class="mb-1 mx-auto w-[400px] h-[400px]" [src]="product.image" alt="img" />
-        <div class="w-full px-8 flex flex-col justify-between">
-            <div>
-                <h5>{{product.category}}</h5>
-                <p class="truncate hover:whitespace-normal text-[25px] font-medium leading-[32px]">{{product.title}}</p>
-                <p class="max-w-[500px]">{{product.description}}</p>
-            </div>
-            <div class="flex justify-between">
-                <span class="text-red-400">{{product.price | currency}}</span>
-                <button (click)="onAddToCart(product)">
-                    <mat-icon class="text-gray-500">shopping_cart</mat-icon>
-                </button>
+<div>
+    <mat-card *ngIf="product" class="text-center w-full py-12 flex justify-center items-start">
+        <div class="w-3/4 flex">
+            <img class="mb-1 mx-auto w-[400px] h-[400px]" width="400" height="400" [src]="product.image" alt="img" />
+            <div class="max-w-[600px] px-8 flex flex-col justify-center items-center">
+                <div class="mb-12">
+                    <p class="text-[25px] font-medium leading-[32px]">{{product.title}}</p>
+                    <h5>{{product.category}}</h5>
+                    <p class="max-w-[500px]">{{product.description}}</p>
+                </div>
+                <div class="flex justify-between w-full">
+                    <p class="text-red-400 mr-[150px]">{{product.price | currency}}</p>
+                    <button (click)="onAddToCart(product)">
+                        <mat-icon class="text-gray-500">shopping_cart</mat-icon>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-</mat-card>
+    </mat-card>
+    <p class="text-[25px] font-medium leading-[32px] px-12 py-12">Related products:</p>
+    <mat-grid-list
+        *ngIf="products"
+        gutterSize="16"
+        [cols]="4"
+        [rowHeight]="400"
+        >
+      <mat-grid-tile *ngFor="let product of products" >
+        <app-product-box  [product]="product"  class="w-full"></app-product-box>
+      </mat-grid-tile>
+    </mat-grid-list>
+</div>
